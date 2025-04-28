@@ -203,13 +203,14 @@ def generate_trip_response(user_input):
         - restaurants
     DO NOT include weather info in the JSON — that will be added separately.
     If the user gives trip details (people, days), ask for missing info politely if needed.
+    If the user does not specify number of people or number of days ask them politely.
     Always be friendly and follow previous trip context if no new destination is mentioned.
     If the user says thanks and all respond in a friendly manner saying i am always here to help you.
     dont answer questions that are not related to trip and planning, make sure to give a decent replay for not answering.
     """
 
     try:
-        chat = genai.GenerativeModel("gemini-1.5-pro").start_chat(history=chat_history)
+        chat = genai.GenerativeModel("gemini-2.0-flash").start_chat(history=chat_history)
         gemini_response = chat.send_message([system_prompt, user_input]).text
 
         if "json" in gemini_response:
